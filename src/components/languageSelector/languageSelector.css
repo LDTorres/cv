@@ -1,0 +1,22 @@
+.languageSelector{
+    position: relative;
+    z-index: 10;
+}
+
+.languageSelector div {
+    position: absolute;
+    right: 20px;
+    top: 20px;  
+}
+
+.languageSelector div span {
+    display: inline-block;
+    width: 33px;
+    height: 33px;
+    text-align: center;
+    box-shadow: -1px 1px 7px 3px rgb(195 189 189 / 30%);
+    margin-left: 14px;
+    padding: 5px;
+    border-radius: 5px;
+    font-weight: bold;
+}
