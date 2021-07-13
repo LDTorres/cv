@@ -4,9 +4,10 @@
 }
 
 .languageSelector div {
-    position: absolute;
+    position: fixed;
     right: 20px;
-    top: 20px;  
+    top: 20px;
+    z-index: 12;
 }
 
 .languageSelector div span {
@@ -19,4 +20,5 @@
     padding: 5px;
     border-radius: 5px;
     font-weight: bold;
+    background: white;
 }

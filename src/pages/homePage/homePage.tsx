@@ -1,11 +1,94 @@
-//import { useTranslation } from 'react-i18next'
-import { Col, Container, Row } from 'react-bootstrap'
+import { useTranslation } from 'react-i18next'
+import { Badge, Col, Container, Row } from 'react-bootstrap'
 import Sidebar from '../../components/sidebar/sidebar'
 
 import './homePage.css'
 
+import { programmingLanguages, studies, experiences, projects } from './constants'
+
 function HomePage() {
-    //const [t] = useTranslation(["common", "homePage"]);
+    const [t] = useTranslation("homePage");
+    const [common] = useTranslation("common");
+
+    const programmingLanguagesCols = programmingLanguages.map(el => {
+        return (
+            <Col key={el.title} sm={12} md={6} lg={4} className='mb-3'>
+                <p>
+                    <b>
+                        {el.translationKey ? t(el.translationKey) : el.title}
+                    </b>
+                    <span className="ml-2">({el.years} {t('years')})</span>
+                </p>
+                {el.items.map((item, i) => {
+                    return <Badge key={i} variant="dark" className='mr-2'>{(
+                        (typeof item == "string") ? item : t(item.translationKey)
+                    )}</Badge>
+                })}
+            </Col>
+        )
+    })
+
+    const studiesCols = studies.map((el, i) => {
+        return (
+            <Col key={i} sm={12} className='mb-3 px-2'>
+                <h5>
+                    {t(el.translationKey)}
+
+                    <span className="d-none d-sm-inline">
+                        <span className="badge badge-info ml-2">{el.from}</span>
+                        <span className="badge badge-dark mx-1">&</span>
+                        <span className="badge badge-end">{el.to}</span>
+                    </span>
+
+                    {
+                        el.description ? 
+                        <p className="h6 mt-2">{t('institution')}: {el.description}</p> : 
+                        null
+                    }
+                </h5>
+            </Col>
+        )
+    })
+
+    const experiencesCol = experiences.map((el, i) => {
+        return (
+            <Col key={i} sm={12} className='mb-3 px-2'>
+                <h5>
+                    {el.title}
+                    <span className="d-none d-sm-inline">
+                        <span className="badge badge-info ml-2">{el.from}</span>
+                        <span className="badge badge-dark mx-1">&</span>
+                        <span className="badge badge-end">{el.to}</span>
+                    </span>
+                </h5>
+                <h6>
+                    <a
+                        href={el.link} target="_new"
+                        className="text-dark text-underline"
+                        style={{ textDecoration: "underline" }}
+                    >
+                        {el.company}</a>
+                </h6>
+            </Col>
+        )
+    })
+
+    const projectsCol = projects.map((el, i) => {
+        return (
+            <Col key={i + 'a'} sm={12} md={6} className='mb-3 px-2'>
+                <div className="card">
+                    <div className="scroll-y project-img">
+                        <img src={el.img} className="card-img-top" alt="..." />
+                    </div>
+                    <div className="card-body">
+                        <h5 className="card-title">{el.title}</h5>
+                        <a href={el.behance} className="btn btn-outline-info px-2" target="_new">Behance</a>
+                        <a href={el.link} className="btn btn-outline-info px-2 ml-2" target="_new">Web</a>
+                    </div>
+                </div>
+            </Col>
+        )
+    })
 
     return (
         <Container fluid>
@@ -15,199 +98,38 @@ function HomePage() {
                 </Col>
                 <Col sm={8} lg={9} className="main-articles pl-md-4">
                     <article className="about-me ">
-                        <h2 id="acerca-de-mi" className="py-3">Acerca de mi</h2>
-                        <p>
-                            Programador con experiencia en Backend y Frontend. Manejo de bases de datos relacionales y no relacionales.
-                            Siguiendo
-                            los estándares de programación, seguridad y eficiencia de código. Experiencia usando sistemas de control de
-                            versiones.
-                            Habilidad para trabajar en cualquier tipo de ambiente, comodo con metodologías ágiles, proactivo y con alta
-                            iniciativa.
-                        </p>
+                        <h2 id="acerca-de-mi" className="py-3">{common('aboutMe')}</h2>
+                        <p>{t('meDescription')}</p>
 
-                        <p><b>Lenuajes de programación:</b></p>
-                        <div>
-                            <div className="row px-2">
-                                <div className="col-sm-12 col-md-6 col-lg-4 px-2 mb-3">
-                                    <p>JavaScript (+5 years)
-                                        ● TypeScript
-                                        ● Angular
-                                        ● Ionic
-                                        ● VueJs
-                                        ● React
-                                        ● AdonisJs
-                                        ● NuxtJs
-                                        ● Jest
-                                    </p>
-                                    <p>Maquetado y estilos (+5 years)
-                                        ● HTML
-                                        ● CSS
-                                        ● SASS
-                                        ● Bootstrap
-                                    </p>
-                                </div>
-                                <div className="col-sm-12 col-md-6 col-lg-4 px-2 mb-3">
-                                    <p>Golang (+3 years)
-                                        ● Beego
-                                        ● Fiber
-                                        ● Unit Testing
-                                    </p>
-                                    <p>Base de datos (+5 years)
-                                        ● Mysql
-                                        ● Oracle
-                                        ● Postgre
-                                        ● MongoDB
-                                        ● Elasticsearch
-                                        ● Redist
-                                    </p>
-                                </div>
-                                <div className="col-sm-12 col-md-6 col-lg-4 px-2 mb-3">
-                                    <p>PHP (+5 years)
-                                        ● Laravel
-                                        ● Codeigniter
-                                        ● Slim
-                                    </p>
-                                    <p>Manejo de servidores
-                                        ● Despliegue a producción
-                                        ● Apache
-                                        ● Nginx
-                                        ● Cronjobs
-                                        ● Shell script
-                                    </p>
-                                    <p>CI/CD Integración continua (+2 years)
-                                        ● Gitlab runner
-                                        ● Pipelines
-                                        ● Docker
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
+                        <p><b>{t('programmingLanguages')}</b></p>
+
+                        <Row className="px-2">
+                            {programmingLanguagesCols}
+                        </Row>
                     </article>
 
                     <article className="information">
-                        <h2 id="estudios" className="py-3">Estudios</h2>
+                        <h2 id="estudios" className="py-3">{common('studies')}</h2>
 
-                        <div className="row px-2">
-                            <div className="col-sm-12 px-2 mb-3">
-                                <h5>
-                                    Título de bachiller en ciencias
-                                    <span className="d-none d-sm-inline">
-                                        <span className="badge badge-info">2008</span>
-                                        <span className="badge badge-dark">&</span>
-                                        <span className="badge badge-end">2014</span>
-                                    </span>
-                                </h5>
-                                <h6>Institución: UECA Cristo Rey</h6>
-                            </div>
-
-                            <div className="col-sm-12 px-2 mb-3">
-                                <h5>
-                                    Curso de servicio ténico a computadores
-                                    <span className="d-none d-sm-inline">
-                                        <span className="badge badge-info">2014</span>
-                                        <span className="badge badge-dark">&</span>
-                                        <span className="badge badge-end">2015</span>
-                                    </span>
-                                </h5>
-                            </div>
-
-                            <div className="col-sm-12 px-2 mb-3">
-                                <h5>
-                                    Técnico Superior Universitario
-                                    <span className="d-none d-sm-inline">
-                                        <span className="badge badge-info">2014</span>
-                                        <span className="badge badge-dark">&</span>
-                                        <span className="badge badge-end">2017</span>
-                                    </span>
-                                </h5>
-                                <h6>
-                                    Institución: IUTEB Instituto Universitario de Tecnología del
-                                    Estado Bolívar
-                                </h6>
-                            </div>
-                        </div>
+                        <Row className="px-2">
+                            {studiesCols}
+                        </Row>
                     </article>
 
                     <article className="experience">
-                        <h2 id="experiencia" className="py-3">Experiencia laboral</h2>
+                        <h2 id="experiencia" className="py-3">{common('experience')}</h2>
 
                         <div className="row px-2">
-                            <div className="col-sm-12 px-2 mb-3">
-                                <h5>
-                                    Desarrollador Backend
-                                    <span className="d-none d-sm-inline">
-                                        <span>(11/2019 - Presente)</span>
-                                    </span>
-                                </h5>
-                                <h6>
-                                    <b>Empresa: </b> Banco Santander Tecnología
-                                    <a href="https://santander.com.ar" target="_new"><i className="fas fa-link"></i></a>
-                                </h6>
-                            </div>
-
-                            <div className="col-sm-12 px-2 mb-3">
-                                <h5>
-                                    Desarrollador FullStack
-                                    <span className="d-none d-sm-inline">
-                                        <span>(04/2018 - 11/2019)</span>
-                                    </span>
-                                </h5>
-                                <h6>
-                                    <b>Empresa: </b> TrazoPro
-                                    <a href="https://www.trazo.pro/" target="_new"><i className="fas fa-link"></i></a>
-                                </h6>
-                            </div>
-
-                            <div className="col-sm-12 px-2 mb-3">
-                                <h5>
-                                    Desarrollador FullStack & Team Lead
-                                    <span className="d-none d-sm-inline">
-                                        <span>(06/2018 - 2019)</span>
-                                    </span>
-                                </h5>
-                                <h6>
-                                    <b>Empresa: </b> MensoreStudio
-                                    <a href="https://mensorestudio.com/" target="_new"><i className="fas fa-link"></i></a>
-                                </h6>
-                            </div>
-
-                            <div className="col-sm-12 px-2 mb-3">
-                                <h5>
-                                    Desarrollador FullStack
-                                    <span className="d-none d-sm-inline">
-                                        <span>(03/2015 - 02/2019)</span>
-                                    </span>
-                                </h5>
-                                <h6>
-                                    <b>Empresa: </b> Liderlogo
-                                    <a href="http://liderlogos.com/" target="_new"><i className="fas fa-link"></i></a>
-                                </h6>
-                            </div>
+                            {experiencesCol}
                         </div>
                     </article>
 
                     <article className="projects">
-                        <h2 id="proyectos" className="pt-3">Proyectos</h2>
+                        <h2 id="proyectos" className="pt-3">{common('projects')}</h2>
 
-                        <h5 className="py-3">Sitios Web</h5>
+                        <h5 className="py-3">{t('websites')}</h5>
                         <div className="row px-2 webs">
-                            <div className="col-sm-12 col-md-6 px-2 mb-3">
-                                <div className="card">
-                                    <div className="scroll-y project-img">
-                                        <img src="/img/projects/bazam.png" className="card-img-top" alt="..." />
-                                    </div>
-                                    <div className="card-body">
-                                        <h5 className="card-title">Bazamdev</h5>
-                                        <p className="card-text">
-                                            Tu lo sueñas, nosotros lo hacemos realidad
-                                        </p>
-                                        <a href="https://www.behance.net/gallery/53115531/Landing-Page-Bazam-Web" className="btn btn-outline-site"
-                                            target="_new"><i className="fas fa-heart"></i></a>
-                                        <a href="http://www.bazamdev.com/" className="btn btn-outline-site" target="_new"><i
-                                            className="fas fa-link"></i></a>
-                                    </div>
-                                </div>
-                            </div>
+                            {projectsCol}
 
                             <div className="col-sm-12 col-md-6 px-2 mb-3">
                                 <div className="card">
@@ -340,7 +262,7 @@ function HomePage() {
                             </div>
                         </div>
 
-                        <h5 className="py-3">Aplicaciones web</h5>
+                        <h5 className="py-3">Web apps</h5>
                         <div className="row px-2 web-apps">
                             <div className="col-sm-12 col-md-6 px-2 mb-3">
                                 <div className="card">

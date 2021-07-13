@@ -11,6 +11,7 @@ i18n
 .init({
     debug: true,
     fallbackLng: 'es',
+    ns: ['common', 'homePage', 'siteInformation'],
     defaultNS: 'common',
     interpolation: {
         escapeValue: false

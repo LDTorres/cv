@@ -1,3 +1,19 @@
 {
-    
+    "meDescription": "Programador con experiencia en Backend y Frontend. Adaptable al stack de tecnologías y metodologías de trabajo. Capacidad para el manejo de problemas y tiempos de entrega. Empleo de estándares de programación, seguridad y eficiencia de código. Destreza en el uso de sistemas de control de versiones. Habilidad para trabajar en cualquier tipo de ambiente, proactivo y con alta iniciativa.",
+    "programmingLanguages": "Lenguajes de programación:",
+    "years": "Años",
+
+    "layoutAndStyles": "Maquetado y estilos",
+    "databases": "Bases de datos",
+    "serverManagement": "Manejo de servidores",
+    "methodologies": "Metodologias",
+    "deployToProd": "Despliege a producción",
+
+    "institution": "Institución",
+    "study1": "Técnico Superior Universitario",
+    "study2": "Curso de servicio ténico a computadores",
+    "study3": "Título de bachiller en ciencias",
+
+    "company": "Empresa",
+    "websites": "Sitios web"
 }
